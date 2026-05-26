@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Save KBR Park — Stop H-CITI Flyovers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a3a1a;
+    --green-mid: #2d5a27;
+    --green-light: #4a7c3f;
+    --accent: #c8a84b;
+    --red: #c0392b;
+    --off-white: #f5f0e8;
+    --text: #1a1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--off-white);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--green);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(74,124,63,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 20%, rgba(200,168,75,0.08) 0%, transparent 50%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 900;
+    color: var(--off-white);
+    line-height: 0.95;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: rgba(245,240,232,0.7);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-top: 2rem;
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-tag {
+    margin-top: 2.5rem;
+    display: inline-block;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.6rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(245,240,232,0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: pulse 2s ease infinite;
+  }
+
+  /* WHAT THEY SAID VS WHAT THEY DID */
+  .contrast-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 60vh;
+  }
+
+  .contrast-left {
+    background: var(--green-mid);
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contrast-right {
+    background: var(--red);
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .contrast-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+
+  .contrast-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: white;
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  .contrast-source {
+    margin-top: 1.5rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+  }
+
+  .contrast-fact {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: white;
+    line-height: 1.4;
+  }
+
+  .contrast-fact strong {
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  /* NUMBERS SECTION */
+  .numbers {
+    background: var(--off-white);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .numbers-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .numbers h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--green);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.3;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .stat-box {
+    background: var(--green);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .stat-box:nth-child(even) {
+    background: var(--green-mid);
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 900;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.7);
+    margin-top: 0.5rem;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+  }
+
+  /* THE HIDDEN COST */
+  .argument {
+    background: var(--text);
+    padding: 5rem 2rem;
+    color: var(--off-white);
+  }
+
+  .argument-inner {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .argument-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .argument h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  .argument-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .argument-points li {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 1rem;
+    align-items: start;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(245,240,232,0.85);
+  }
+
+  .argument-points li::before {
+    content: attr(data-n);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  .argument-points li strong {
+    color: var(--off-white);
+    font-weight: 500;
+  }
+
+  /* WHAT THEY'RE NOT TELLING YOU */
+  .gazette {
+    background: var(--off-white);
+    padding: 5rem 2rem;
+  }
+
+  .gazette-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .gazette-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .gazette h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--green);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .gazette-intro {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+  }
+
+  .gazette-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .gazette-table thead tr {
+    background: var(--green);
+    color: var(--off-white);
+  }
+
+  .gazette-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .gazette-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    line-height: 1.4;
+    color: #333;
+  }
+
+  .gazette-table tr:nth-child(odd) td {
+    background: rgba(26,58,26,0.04);
+  }
+
+  .gazette-note {
+    margin-top: 1.5rem;
+    padding: 1.2rem 1.5rem;
+    background: rgba(192,57,43,0.08);
+    border-left: 3px solid var(--red);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  .gazette-note strong {
+    color: var(--red);
+  }
+
+  /* WHAT WORKS INSTEAD */
+  .alternatives {
+    background: var(--green);
+    padding: 5rem 2rem;
+    color: var(--off-white);
+  }
+
+  .alternatives-inner {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .alternatives-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .alternatives h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .alternatives-intro {
+    color: rgba(245,240,232,0.7);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 580px;
+  }
+
+  .alt-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .alt-card {
+    border: 1px solid rgba(200,168,75,0.3);
+    padding: 2rem 1.5rem;
+    position: relative;
+  }
+
+  .alt-card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: rgba(200,168,75,0.15);
+    font-weight: 900;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    line-height: 1;
+  }
+
+  .alt-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  .alt-card p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgba(245,240,232,0.75);
+  }
+
+  /* DEMAND */
+  .demand {
+    background: var(--accent);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .demand h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--green);
+    max-width: 650px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.15;
+  }
+
+  .demand p {
+    font-size: 1rem;
+    color: rgba(26,58,26,0.75);
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+  }
+
+  .demand-asks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .demand-ask {
+    background: var(--green);
+    color: var(--off-white);
+    padding: 0.8rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 2px;
+    letter-spacing: 0.03em;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--text);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(245,240,232,0.35);
+    letter-spacing: 0.05em;
+    line-height: 1.8;
+  }
+
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .contrast-section {
+      grid-template-columns: 1fr;
+    }
+    .contrast-left, .contrast-right {
+      padding: 3rem 1.5rem;
+    }
+    .gazette-table {
+      font-size: 0.8rem;
+    }
+    .gazette-table th, .gazette-table td {
+      padding: 0.7rem 0.6rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Hyderabad · KBR Park · H-CITI</p>
+  <h1>They call it<span>People-First.</span></h1>
+  <p class="hero-sub">Hyderabad has built 40+ flyovers in a decade. Congestion has worsened every year. Now the government wants to build multi-level flyovers around KBR Park — using the same logic that has never worked.</p>
+  <span class="hero-tag">G.O.Rt.No.125 · March 17, 2025</span>
+  <p class="scroll-hint">↓ scroll</p>
+</section>
+
+<!-- WHAT THEY SAID VS REALITY -->
+<div class="contrast-section">
+  <div class="contrast-left">
+    <p class="contrast-label">What the Minister said</p>
+    <p class="contrast-quote">"H-CITI is future-ready, people-first and transparent in its progress."</p>
+    <p class="contrast-source">— Minister Sridhar Babu Duddilla, @OffDSB</p>
+  </div>
+  <div class="contrast-right">
+    <p class="contrast-label">What the data shows</p>
+    <p class="contrast-fact">
+      <strong>40+</strong>
+      flyovers built under SRDP since 2015. Hyderabad commuters now lose 123 hours a year to congestion — and the number keeps rising.
+    </p>
+  </div>
+</div>
+
+<!-- NUMBERS -->
+<section class="numbers">
+  <p class="numbers-label">The pattern around KBR Park</p>
+  <h2>More flyovers. More congestion. Same cycle. New acronym.</h2>
+  <div class="stats-grid">
+    <div class="stat-box">
+      <span class="stat-number">40+</span>
+      <p class="stat-label">Flyovers built in Hyderabad under SRDP. Congestion has increased every year since.</p>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">123 hrs</span>
+      <p class="stat-label">Hours lost by Hyderabad commuters to traffic every year — up from the previous year</p>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">₹7,032 Cr</span>
+      <p class="stat-label">Total H-CITI budget — spent on the same infrastructure logic that created the problem</p>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number">0</span>
+      <p class="stat-label">Independent, publicly available traffic studies of this corridor before approving construction</p>
+    </div>
+  </div>
+</section>
+
+<!-- THE ARGUMENT -->
+<section class="argument">
+  <div class="argument-inner">
+    <p class="argument-label">Why flyovers don't work</p>
+    <h2>The hidden cost that nobody is talking about</h2>
+    <ul class="argument-points">
+      <li data-n="1"><div><strong>Flyovers shift congestion, they don't solve it.</strong> Every flyover moves the bottleneck from one junction to the next. Hyderabad has built 40+ flyovers under SRDP. Congestion has worsened every year.</div></li>
+      <li data-n="2"><div><strong>The pillars make the road below narrower.</strong> Where flyovers are built, the supporting columns eat into the road beneath. In many cases the reduced width can no longer accommodate full-sized buses — the vehicles that carry the most people.</div></li>
+      <li data-n="3"><div><strong>The compensation mechanism makes congestion worse.</strong> When land is acquired for road widening, owners receive TDR — Transfer of Development Rights — allowing them to build extra floors on their rebuilt property. Around KBR Park alone, 327 properties are affected. Each rebuilt taller structure brings more residents, more vehicles, more parking demand. The new road capacity gets absorbed within years. The road was widened. The congestion returned. Nothing changed except the addresses.</div></li>
+      <li data-n="4"><div><strong>This is a governance problem, not an infrastructure gap.</strong> Cars parked illegally along this corridor already consume an entire lane of road capacity at peak hours. Enforcing existing no-parking rules costs nothing and recovers that capacity immediately — no construction, no acquisition, no crores spent.</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- GAZETTE FACTS -->
+<section class="gazette">
+  <div class="gazette-inner">
+    <p class="gazette-label">From the official record</p>
+    <h2>What the Telangana Gazette actually says</h2>
+    <p class="gazette-intro">The land acquisition was gazetted on March 24, 2025 (Telangana Gazette No. 70-D, G.O.Rt.No.125). Four junctions surrounding KBR Park are affected — each proposed for road widening or multi-level flyover construction under H-CITI.</p>
+    <table class="gazette-table">
+      <thead>
+        <tr>
+          <th>Junction</th>
+          <th>Properties Affected</th>
+          <th>Land (Sq. Yards)</th>
+          <th>District</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Gulmohar Park to BHEL Junction via Tara Nagar (Road Widening + ROB)</td>
+          <td>227</td>
+          <td>33,375</td>
+          <td>Rangareddy</td>
+        </tr>
+        <tr>
+          <td>Jubilee Hills Check Post Junction (Multi-level Flyover)</td>
+          <td>47</td>
+          <td>12,175</td>
+          <td>Hyderabad</td>
+        </tr>
+        <tr>
+          <td>Mugdha Junction (Multi-level Flyover)</td>
+          <td>40</td>
+          <td>7,250</td>
+          <td>Hyderabad</td>
+        </tr>
+        <tr>
+          <td>Cancer Hospital Junction (Multi-level Flyover)</td>
+          <td>18</td>
+          <td>13,076</td>
+          <td>Hyderabad</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="gazette-note"><strong>The TDR cycle:</strong> Affected property owners receive Transfer of Development Rights — permission to build extra floors on their rebuilt structures. More floors mean more residents and more vehicles. The very compensation mechanism designed to make road widening acceptable is what ensures the congestion returns.</p>
+  </div>
+</section>
+
+<!-- ALTERNATIVES -->
+<section class="alternatives">
+  <div class="alternatives-inner">
+    <p class="alternatives-label">There is another way</p>
+    <h2>What actually decongests cities</h2>
+    <p class="alternatives-intro">Cities comparable to Hyderabad in density and income have reduced congestion — not by building more roads, but by making existing roads work better. The tools are known. None require acquiring a single property.</p>
+    <div class="alt-cards">
+      <div class="alt-card">
+        <span class="alt-card-num">1</span>
+        <h3>Junction Redesign</h3>
+        <p>Reconfigure signal timings, turning radii, and lane markings at all four junctions. Proven to reduce peak-hour delays by 20–40% at a fraction of flyover cost.</p>
+      </div>
+      <div class="alt-card">
+        <span class="alt-card-num">2</span>
+        <h3>Dedicated Bus Lanes</h3>
+        <p>A single bus carries 60–80 passengers. One dedicated bus lane on this corridor moves more people than two new flyover lanes — without displacing a single family.</p>
+      </div>
+      <div class="alt-card">
+        <span class="alt-card-num">3</span>
+        <h3>Parking Enforcement</h3>
+        <p>Illegal roadside parking on this corridor effectively removes one lane of road capacity. Enforcement — not construction — recovers that lane immediately and at zero cost.</p>
+      </div>
+      <div class="alt-card">
+        <span class="alt-card-num">4</span>
+        <h3>Independent Traffic Study</h3>
+        <p>No publicly available, independently reviewed study of this corridor exists. Before spending ₹7,032 crore, commission one — from a university, not a consultant who profits from construction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMAND -->
+<section class="demand">
+  <h2>We are asking for three things.</h2>
+  <p>Before a single property is acquired or another tree is felled around KBR Park, these demands must be met.</p>
+  <div class="demand-asks">
+    <span class="demand-ask">🛑 Suspend the land acquisition</span>
+    <span class="demand-ask">📋 Hold public hearings as required by law</span>
+    <span class="demand-ask">🔬 Commission an independent traffic study</span>
+  </div>
+</section>
+
+<!-- FOOTER / REFERENCES -->
+<footer>
+  <p style="color: rgba(245,240,232,0.6); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem;">References</p>
+  <div style="max-width: 700px; margin: 0 auto; text-align: left; display: flex; flex-direction: column; gap: 0.8rem;">
+    <p><span style="color: var(--accent);">[1]</span> Telangana Gazette No. 70-D, March 24, 2025. G.O.Rt.No.125, Municipal Administration &amp; Urban Development (Plg.I), March 17, 2025. Land Acquisition Proposal for Road Widening, ROB and Multi-Level Flyovers Surrounding KBR Park under H-CITI.</p>
+    <p><span style="color: var(--accent);">[2]</span> Donthi, Narasimha Reddy. "The Unending Road: Hyderabad's Infrastructure Illusion." <em>The South First</em>, May 22, 2026. <a href="https://thesouthfirst.com" target="_blank">thesouthfirst.com</a></p>
+    <p><span style="color: var(--accent);">[3]</span> Minister Sridhar Babu Duddilla (@OffDSB), statement on H-CITI initiative. <a href="https://x.com/OffDSB" target="_blank">x.com/OffDSB</a></p>
+    <p><span style="color: var(--accent);">[4]</span> TomTom Traffic Index 2025, Hyderabad. Commuters lose 123 hours annually to congestion.</p>
+    <p><span style="color: var(--accent);">[5]</span> "GHMC Grappling to Implement TDR Scheme for Road Widening Projects." <em>The Hans India</em>, May 5, 2023.</p>
+    <p><span style="color: var(--accent);">[6]</span> "Congress Government Pushes TDR for Land Acquisition in Hyderabad." <em>Telangana Today</em>, February 24, 2026.</p>
+  </div>
+  <p style="margin-top: 2rem; color: rgba(245,240,232,0.25);">This page was created by concerned citizens of Hyderabad. Share freely.</p>
+</footer>
+
+</body>
+</html>
